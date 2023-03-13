@@ -2,78 +2,81 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-align: center;
-}
-
-#board {
+    background: #1a1e23;
+    margin: 0;
+  }
+  
+  #board {
     width: 960px;
     height: 640px;
     border: 10px solid darkgray;
-    background-color: lightgray;
-
+    background-color: darkslategray;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-}
-#board div {
+  }
+  
+  #board div {
     width: 38px;
     height: 38px;
-    border: 1px solid whitesmoke;
-    
+    border: 1px solid black;
     /* text */
     font-size: 30px;
     margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
-
-}
-
-#flag-button {
+  }
+  
+  #flag-button {
     width: 100px;
-    height: 50px;
+    height: 40px;
     font-size: 20px;
     background-color: lightgray;
     border: none;
-}
-.tile-full {
+  }
+  
+  .tile-full {
     color: lightblue;
-}
-
-.tile-clicked {
-    background: darkgray;
-
-}
-
-
-.x1 {
-    color: blue;
-}
-
-.x2 {
-    color: green;
-}
-
-.x3 {
+  }
+  
+  .tile-overflow {
     color: red;
-}
-
-.x4 {
+  }
+  
+  .tile-clicked {
+    background: rgb(20, 20, 20);
+    color: whitesmoke;
+  }
+  
+  .x1 {
+    color: pink;
+  }
+  
+  .x2 {
+    color: green;
+  }
+  
+  .x3 {
+    color: red;
+  }
+  
+  .x4 {
     color: navy;
-}
-
-.x5 {
+  }
+  
+  .x5 {
     color: brown;
-}
-
-.x6 {
+  }
+  
+  .x6 {
     color: teal;
-}
-
-.x7 {
+  }
+  
+  .x7 {
     color: black;
-}
-
-.x8 {
-    color: purple
-}
-
+  }
+  
+  .x8 {
+    color: purple;
+  }  

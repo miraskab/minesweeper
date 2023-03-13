@@ -12,6 +12,11 @@ var flagEnabled = false;
 var firstCellClicked = false;
 
 var gameOver = false;
+var defaultBackgroundColor = "rgb(20, 20, 20)";
+var defaultColor = "white";
+var fullColor = "rgb(251, 146, 155)";
+var overflowBackgroundColor = "red";
+var overflowColor = "yellow";
 
 window.onload = function() {
     startGame();
@@ -115,7 +120,8 @@ function setMines(mines) {
 }
 
 function startGame() {
-    document.getElementById("mines-count").innerText = minesCount;
+    // document.getElementById("mines-count").color = "white";
+    document.getElementById("mines-count").innerText = "Mines: " + minesCount;
     document.getElementById("flag-button").addEventListener("click", setFlag)
     // setMines()
     // populated with divs
@@ -163,27 +169,20 @@ function clickTile() {
 
     if(!tile.classList.contains("tile-clicked")){
         if (flagEnabled){
-            if (tile.innerText == ""){
-                tile.innerText = "🚩"
-                minesCount -= 1;
-                document.getElementById("mines-count").innerText = minesCount;
-            }
-            else if (tile.innerText === "🚩"){
-                tile.innerText = ""
-                minesCount += 1;
-                document.getElementById("mines-count").innerText = minesCount;
-            }
-            return;
+            rightClickTile(tile);
         }
-
-        let coords = tile.id.split("-");
-        let r = parseInt(coords[0]);
-        let c = parseInt(coords[1]);
-        if(!firstCellClicked) {
-            initiateGame(r, c)
-            firstCellClicked = true;
+        else {
+            let coords = tile.id.split("-");
+            let r = parseInt(coords[0]);
+            let c = parseInt(coords[1]);
+            
+            if(!firstCellClicked) {
+                initiateGame(r, c)
+                firstCellClicked = true;
+            }
+            checkMine(r, c);
         }
-        checkMine(r, c);
+        
     }
     else {
         // return
@@ -286,11 +285,24 @@ function checkFullness(r, c){
         if(temp.innerText == "🚩") minesCurrent += 1;
     }
     if(minesCurrent == minesTotal){
-        // console.log("12314")
-        board[r][c].classList.add("tile-full");
+
+        document.getElementById(board[r][c].id).style.color = fullColor;
+        if(board[r][c].classList.contains("tile-clicked")){
+            document.getElementById(board[r][c].id).style.backgroundColor = defaultBackgroundColor;
+        }
+
+    }
+    else if(minesCurrent > minesTotal) {
+
+        if(board[r][c].classList.contains("tile-clicked")){
+            document.getElementById(board[r][c].id).style.color = overflowColor;
+            document.getElementById(board[r][c].id).style.backgroundColor = overflowBackgroundColor;
+        }
+
     }
     else {
-        board[r][c].classList.remove("tile-full");
+        document.getElementById(board[r][c].id).style.color = defaultColor;
+
     }
 }
 // In case of game over, reveal all mines
