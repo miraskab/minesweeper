@@ -36,21 +36,6 @@ function neighborCells(row, elem, matrix){
     }
     return ans
 }
-// neighborCells(0, 0, [[1, 2, 3], [4, 5, 6]])
-
-// function neighborCellsValues(row, elem, matrix){
-//     ans = [];
-//     width = matrix.length;
-//     height = matrix[0].length;
-//     for(let i = -1; i <= 1; i++) {
-//         for(let j = -1; j <= 1; j++) {
-//             if(row + i >= 0 && row + i < width && elem + j >= 0 && elem + j < height && !(i === 0 && j === 0)){
-//                 ans.push(matrix[row+i][elem+j])
-//             }
-//         }
-//     }
-//     return ans
-// }
 
 function sum(matrix){
     ans = 0;
@@ -120,7 +105,7 @@ function setMines(mines) {
 }
 
 function startGame() {
-    // document.getElementById("mines-count").color = "white";
+    document.getElementById("mines-count").color = "white";
     document.getElementById("mines-count").innerText = "Mines: " + minesCount;
     document.getElementById("flag-button").addEventListener("click", setFlag)
     // setMines()
@@ -139,7 +124,6 @@ function startGame() {
                 console.log(tile)
                 rightClickTile(tile);
             })
-
 
             document.getElementById("board").append(tile);
             row.push(tile);
@@ -257,12 +241,12 @@ function rightClickTile(tile) {
         if (tile.innerText == ""){
             tile.innerText = "🚩"
             minesCount -= 1;
-            document.getElementById("mines-count").innerText = minesCount;
+            document.getElementById("mines-count").innerText = "Mines: " + minesCount;
         }
         else if (tile.innerText === "🚩"){
             tile.innerText = ""
             minesCount += 1;
-            document.getElementById("mines-count").innerText = minesCount;
+            document.getElementById("mines-count").innerText = "Mines: " + minesCount;
         }
     }
     let coords = tile.id.split("-");
