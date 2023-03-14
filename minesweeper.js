@@ -186,6 +186,12 @@ function clickTile() {
         document.getElementById("mines-count").innerText = "Cleared";
         gameOver = true;
         revealMines();
+        for (let i = 0; i < rows; i++){
+            for (let j = 0; j < columns; j++) {
+                // document.getElementById(board[i][j].id).style.color = fullColor;
+                board[i][j].style.color = fullColor;
+            }
+        }
     }
 }
 
@@ -270,23 +276,28 @@ function checkFullness(r, c){
     }
     if(minesCurrent == minesTotal){
 
-        document.getElementById(board[r][c].id).style.color = fullColor;
+        // document.getElementById(board[r][c].id).style.color = fullColor;
+        board[r][c].style.color = fullColor;
         if(board[r][c].classList.contains("tile-clicked")){
-            document.getElementById(board[r][c].id).style.backgroundColor = defaultBackgroundColor;
+            // document.getElementById(board[r][c].id).style.backgroundColor = defaultBackgroundColor;
+            board[r][c].style.backgroundColor = defaultBackgroundColor;
         }
 
     }
     else if(minesCurrent > minesTotal) {
 
         if(board[r][c].classList.contains("tile-clicked")){
-            document.getElementById(board[r][c].id).style.color = overflowColor;
-            document.getElementById(board[r][c].id).style.backgroundColor = overflowBackgroundColor;
+            // document.getElementById(board[r][c].id).style.color = overflowColor;
+            // document.getElementById(board[r][c].id).style.backgroundColor = overflowBackgroundColor;
+            board[r][c].style.color = overflowColor;
+            board[r][c].style.backgroundColor = overflowBackgroundColor;
+
         }
 
     }
     else {
-        document.getElementById(board[r][c].id).style.color = defaultColor;
-
+        // document.getElementById(board[r][c].id).style.color = defaultColor;
+        board[r][c].style.color = defaultColor;
     }
 }
 // In case of game over, reveal all mines
