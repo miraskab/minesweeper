@@ -2,10 +2,33 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-align: center;
-    background: #1a1e23;
+    background: #0e0f11;
     margin: 0;
   }
   
+#menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* justify-content: space-between; */
+  /* margin-left: 600px; */
+  /* margin-right: 600px; */
+  /* padding: 20px; */
+}
+
+/* #reset {
+  height: 50px;
+  white-space: normal;
+  font-size: 30px;
+  color: white;
+  display: flex;
+  border: 3px solid lightgrey;
+  background-color: darkslategrey;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25%;
+} */
+
 #board {
   user-select: none;
   width: 960px;
@@ -31,17 +54,19 @@ body {
 }
 
 #board div:hover {
-  filter: brightness(150%);
+  filter: brightness(130%);
 }
 
 #flag-button {
-  width: 100px;
-  height: 40px;
+  width: 80px;
+  height: 30px;
   font-size: 20px;
   background-color: lightgray;
   border: none;
 }
-
+#mines-count{
+  color:white;
+}
 .tile-full {
   color: lightblue;
 }
@@ -55,14 +80,14 @@ body {
   color: whitesmoke;
 }
 
+
 .x1 {
   color: pink;
 }
 
-/* html {
+html {
   height: 100%;
-  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-  overflow: hidden; } */
+  overflow: hidden; }
 
 
 

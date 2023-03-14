@@ -2,7 +2,7 @@ var board = [];
 var rows = 16;
 var columns = 24;
 
-var minesCount = 40;
+var minesCount = 70;
 var victoryCondition = rows * columns - minesCount
 var minesLocations = [];
 var matrixTrue = [];
@@ -105,9 +105,9 @@ function setMines(mines) {
 }
 
 function startGame() {
-    document.getElementById("mines-count").color = "white";
     document.getElementById("mines-count").innerText = "Mines: " + minesCount;
     document.getElementById("flag-button").addEventListener("click", setFlag)
+    document.getElementById("board").addEventListener("contextmenu", (event) => event.preventDefault())
     // setMines()
     // populated with divs
     for (let r = 0; r < rows; r++){
@@ -139,10 +139,13 @@ function setFlag() {
     if(flagEnabled) {
         flagEnabled = false;
         document.getElementById("flag-button").style.backgroundColor = "lightgray";
+        document.getElementById('flag-button').innerText = "💣"
     }
     else {
         flagEnabled = true;
         document.getElementById('flag-button').style.backgroundColor = "darkgray"
+        document.getElementById('flag-button').innerText = "🚩"
+
     }
 }
 
@@ -169,7 +172,7 @@ function clickTile() {
         
     }
     else {
-        // return
+        // Reveeal all cells on a previously discovered cell if all mines have been marked
         let coords = tile.id.split("-");
         let r = parseInt(coords[0]);
         let c = parseInt(coords[1]);
@@ -177,20 +180,20 @@ function clickTile() {
     }
     console.log(tilesClicked);
     console.log(minesCount);
+
     // victory condition
     if(tilesClicked === victoryCondition) {
         document.getElementById("mines-count").innerText = "Cleared";
         gameOver = true;
+        revealMines();
     }
 }
 
 // invoked if the cell has not been pressed previously
 function checkMine(r, c) {
-    if (board[r][c].classList.contains("tile-clicked")) return;
-    
-    // console.log(board[r][c].id)
+    if (board[r][c].classList.contains("tile-clicked") || board[r][c].innerText == "🚩") return;
     if (minesLocations.includes(board[r][c].id)) {
-        alert("GAME OVER");
+        document.getElementById("mines-count").innerText = "GAME OVER";
         gameOver = true;
         revealMines();
         return;
@@ -199,9 +202,8 @@ function checkMine(r, c) {
     board[r][c].classList.add("tile-clicked");
     tilesClicked += 1;
 
-    let value = matrixTrue[r][c];
     // console.log(r, c)
-    if(value > 0) {
+    if(matrixTrue[r][c] > 0) {
         board[r][c].innerText = matrixTrue[r][c].toString();
         // board[r][c].classList.add("x" + matrixTrue[r][c].toString())
     }
@@ -219,8 +221,6 @@ function revealCells(r, c){
     let minesCurrent = 0;
     
     for(let i = 0; i < neighbors.length; i++){ 
-        // let nr = neighbors[i][0];
-        // let nc = neighbors[i][1];
         let temp = board[neighbors[i][0]][neighbors[i][1]];
         if(temp.innerText == "🚩") minesCurrent += 1;
     }
@@ -296,7 +296,7 @@ function revealMines() {
             let tile = board[r][c]
             if(minesLocations.includes(tile.id)) {
                 tile.innerText = "💣"
-                tile.style.backgroundColor = "red"
+                // tile.style.backgroundColor = "red"
 
             }
         }
