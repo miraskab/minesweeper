@@ -10,20 +10,57 @@
 
     <body>
         
-        <h1 style="margin: 20px">
-            <div id="menu">
-                <span id="mines-count" style="color:white">Mines: 0</span>
-            </div>
-            
-        </h1>
-
+        <div id="menu">
+            <span id="mines-count" style="color:white">Mines: 0</span>
+            <button id="flag-button">💣</button>
+        </div>
         <div id="board"></div>
-        <br>
-        <button id="flag-button">💣</button>
         <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
         <div id="stars2"></div>
         <div id="stars3"></div>
         
+        <div id="how-to-play">
+            <h1>How to play</h1>
+            <div>
+                <img src="images/unrevealed.png">
+                <p>Unrevealed<br></p>
+                <img src="images/mine.png">
+                <p>Mine</p>
+            </div>
+            <p>
+                An unrevealed tile might have a mine behind it, it might not. The idea is to clear all the tiles that don't have mines behind them.
+            </p>
+            <p>
+                But how are you supposed to avoid them? Here's how:
+            </p>
+            <div>
+                <img src="images/revealed.png">
+                <p>Cleared<br></p>
+                <img src="images/clue.png">
+                <p>Clue</p>
+            </div>
+            <p>
+                If you avoid a mine, the number tells you how many of the 8 surrounding tiles are a black hole. If it's blank, none of the surrounding tiles is a mine.
+            </p>
+            <p>
+                If you think you know where a mine is, flag it!
+            </p>
+            <div>
+                <img src="images/flagged.png">
+                <p>Flagged<br></p>
+                <img src="images/active.png">
+                <p>Active clue</p>
+            </div>
+            <p>
+                Switch into flag mode, and tap the suspected tile. Once you've flagged enough tiles around a clue, it'll become active. 
+            </p>
+            <p>Tap an active clue to clear all the non-flagged tiles around it.</p>
+            <h1>Shortcuts</h1>
+            <p>If on PC, right-clicking a tile will Flag when in Clear mode, or Clear when in Flag mode.</p>
+            <p>If Clear mode is active, long-pressing a tile will Flag it.</p>
+            <p>If Flag mode is active, long-pressing a tile will Clear it.</p>
+        </div>
+
     </body>
 </html>
 

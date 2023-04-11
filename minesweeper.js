@@ -19,6 +19,21 @@ var overflowBackgroundColor = "red";
 var overflowColor = "yellow";
 
 window.onload = function() {
+    screen.orientation.lock();
+    let smallestSide = window.outerHeight;
+
+    if(window.outerWidth < window.outerHeight) {
+        rows = 24;
+        columns = 16;
+        smallestSide = window.outerWidth;
+    }
+    let cellLength = Math.min(Math.floor((smallestSide - 20) / 16) - 2, 38);
+    let htmlBoard = document.getElementById("board");
+    htmlBoard.style.setProperty('--cell-length', cellLength.toString() + "px");
+    htmlBoard.style.setProperty('width', ((cellLength + 2)*columns).toString() + "px");
+    htmlBoard.style.setProperty('height', ((cellLength + 2)*rows).toString() + "px");
+    htmlBoard.style.setProperty('--cell-length', cellLength.toString() + "px");
+    let test = getComputedStyle(htmlBoard).getPropertyValue('--cell-length')
     startGame();
 }
 
@@ -117,13 +132,23 @@ function startGame() {
             let tile = document.createElement("div");
             tile.id = r.toString() + "-" + c.toString();
             tile.addEventListener("click", clickTile);
+            ["mousedown", "touchstart"].forEach(type => {
+                tile.addEventListener(type, longPressTile);
+            });
+            ["mouseup", "touchend"].forEach(type => {
+                tile.addEventListener(type, releaseTile);
+            });
+            tile.classList.add('board-cell');
+
+            // if pc then add this event listener 
+            if(window.outerWidth > 900){
+                tile.addEventListener("contextmenu", (event) => {
+                    event.preventDefault();
+                    console.log("context")
+                    tileFlag(tile);
+                })
+            }
             
-            
-            tile.addEventListener("contextmenu", (event) => {
-                event.preventDefault();
-                console.log(tile)
-                rightClickTile(tile);
-            })
 
             document.getElementById("board").append(tile);
             row.push(tile);
@@ -156,20 +181,11 @@ function clickTile() {
 
     if(!tile.classList.contains("tile-clicked")){
         if (flagEnabled){
-            rightClickTile(tile);
+            tileFlag(tile);
         }
         else {
-            let coords = tile.id.split("-");
-            let r = parseInt(coords[0]);
-            let c = parseInt(coords[1]);
-            
-            if(!firstCellClicked) {
-                initiateGame(r, c)
-                firstCellClicked = true;
-            }
-            checkMine(r, c);
+            tileOpen(tile)
         }
-        
     }
     else {
         // Reveeal all cells on a previously discovered cell if all mines have been marked
@@ -195,6 +211,63 @@ function clickTile() {
     }
 }
 
+function longPressTile() {
+    let tile = this;
+    tile.isHeld = true;
+
+    tile.activeHoldTimeoutId = setTimeout(() => {
+        if(this.isHeld) {
+            if (flagEnabled){
+                tileOpen(tile);
+            }
+            else {
+                tileFlag(tile)
+            }
+        } 
+    }, 300);
+}
+function releaseTile() {
+    this.isHeld = false;
+    console.log("pivo")
+}
+
+function tileOpen(tile) {
+    let coords = tile.id.split("-");
+    let r = parseInt(coords[0]);
+    let c = parseInt(coords[1]);
+    
+    if(!firstCellClicked) {
+        initiateGame(r, c)
+        firstCellClicked = true;
+    }
+    checkMine(r, c);
+}
+
+function tileFlag(tile) {
+    // console.log(tile)
+    if(gameOver) return;
+
+    if(!tile.classList.contains("tile-clicked")){
+        if (tile.innerText == ""){
+            tile.innerText = "🚩"
+            minesCount -= 1;
+            document.getElementById("mines-count").innerText = "Mines: " + minesCount;
+        }
+        else if (tile.innerText === "🚩"){
+            tile.innerText = ""
+            minesCount += 1;
+            document.getElementById("mines-count").innerText = "Mines: " + minesCount;
+        }
+    }
+    let coords = tile.id.split("-");
+    let r = parseInt(coords[0]);
+    let c = parseInt(coords[1]);
+    let neighbors = neighborCells(r, c, matrixTrue);
+    for(let i = 0; i < neighbors.length; i++){
+        checkFullness(neighbors[i][0], neighbors[i][1]);
+    }
+    return;
+}
 // invoked if the cell has not been pressed previously
 function checkMine(r, c) {
     if (board[r][c].classList.contains("tile-clicked") || board[r][c].innerText == "🚩") return;
@@ -239,31 +312,7 @@ function revealCells(r, c){
     }
 }
 
-function rightClickTile(tile) {
-    // console.log(tile)
-    if(gameOver) return;
 
-    if(!tile.classList.contains("tile-clicked")){
-        if (tile.innerText == ""){
-            tile.innerText = "🚩"
-            minesCount -= 1;
-            document.getElementById("mines-count").innerText = "Mines: " + minesCount;
-        }
-        else if (tile.innerText === "🚩"){
-            tile.innerText = ""
-            minesCount += 1;
-            document.getElementById("mines-count").innerText = "Mines: " + minesCount;
-        }
-    }
-    let coords = tile.id.split("-");
-    let r = parseInt(coords[0]);
-    let c = parseInt(coords[1]);
-    let neighbors = neighborCells(r, c, matrixTrue);
-    for(let i = 0; i < neighbors.length; i++){
-        checkFullness(neighbors[i][0], neighbors[i][1]);
-    }
-    return;
-}
 
 function checkFullness(r, c){
     let neighbors = neighborCells(r, c, matrixTrue);

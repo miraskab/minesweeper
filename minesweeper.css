@@ -1,21 +1,28 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    text-align: center;
-    background: #0e0f11;
-    margin: 0;
-  }
-  
-#menu {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* justify-content: space-between; */
-  /* margin-left: 600px; */
-  /* margin-right: 600px; */
-  /* padding: 20px; */
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: center;
+  background: #0e0f11;
+  margin: 0;
 }
 
+#menu {
+  width: 300px;
+  height: 60px;
+  /* background-color: red; */
+  margin: 0 0;
+  font-size: 40px;
+  padding: 0 auto;
+  margin: 15px auto 5px auto;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#mines-count {
+  margin-right: 20px;
+}
 /* #reset {
   height: 50px;
   white-space: normal;
@@ -37,20 +44,23 @@ body {
   background-color: darkslategray;
   margin: 0 auto;
   display: flex;
+  --cell-length: 38px;
+  --cell-font-size: 30px;
   flex-wrap: wrap;
 }
 
-#board div {
+.board-cell {
   user-select: none;
-  width: 38px;
-  height: 38px;
+  width: var(--cell-length);
+  height: var(--cell-length);
   border: 1px solid black;
   /* text */
-  font-size: 30px;
+  font-size: var(--cell-font-size);
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 2px;
 }
 
 #board div:hover {
@@ -58,11 +68,12 @@ body {
 }
 
 #flag-button {
-  width: 80px;
-  height: 30px;
-  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  font-size: 28px;
   background-color: lightgray;
   border: none;
+  border-radius: 20%;
 }
 #mines-count{
   color:white;
@@ -85,13 +96,10 @@ body {
   color: pink;
 }
 
-html {
-  height: 100%;
-  overflow: hidden; }
-
 
 
 #stars2 {
+  overflow:hidden;
   width: 2px;
   height: 2px;
   background: transparent;
@@ -107,6 +115,7 @@ html {
     box-shadow: 1117px 1234px #FFF , 1538px 610px #FFF , 326px 1475px #FFF , 262px 351px #FFF , 160px 445px #FFF , 895px 1068px #FFF , 1860px 582px #FFF , 503px 734px #FFF , 1172px 1440px #FFF , 143px 283px #FFF , 1040px 1060px #FFF , 1154px 1045px #FFF , 304px 1733px #FFF , 15px 459px #FFF , 1071px 312px #FFF , 1708px 1964px #FFF , 553px 1445px #FFF , 1590px 622px #FFF , 1380px 64px #FFF , 1144px 107px #FFF , 1250px 1972px #FFF , 655px 1588px #FFF , 40px 1885px #FFF , 1352px 1998px #FFF , 1364px 1387px #FFF , 626px 178px #FFF , 351px 70px #FFF , 894px 217px #FFF , 1857px 1324px #FFF , 1979px 1287px #FFF , 1210px 495px #FFF , 984px 659px #FFF , 1203px 432px #FFF , 35px 852px #FFF , 1250px 992px #FFF , 1309px 673px #FFF , 1819px 1079px #FFF , 1005px 1237px #FFF , 1430px 1318px #FFF , 119px 1095px #FFF , 1078px 706px #FFF , 1941px 903px #FFF , 1098px 661px #FFF , 1163px 1075px #FFF , 1705px 304px #FFF , 1464px 1605px #FFF , 1441px 110px #FFF , 1804px 768px #FFF , 583px 937px #FFF , 256px 1623px #FFF , 561px 886px #FFF , 1271px 73px #FFF , 909px 205px #FFF , 1747px 280px #FFF , 545px 1656px #FFF , 1672px 197px #FFF , 1437px 1713px #FFF , 1491px 462px #FFF , 103px 1293px #FFF , 1437px 1770px #FFF , 1709px 1184px #FFF , 869px 26px #FFF , 993px 140px #FFF , 1180px 1465px #FFF , 1281px 974px #FFF , 253px 15px #FFF , 695px 962px #FFF , 1239px 1810px #FFF , 1297px 1566px #FFF , 575px 1647px #FFF , 1294px 1741px #FFF , 1447px 91px #FFF , 722px 1978px #FFF , 1680px 272px #FFF , 354px 1739px #FFF , 1516px 876px #FFF , 355px 1371px #FFF , 1763px 1745px #FFF , 257px 1042px #FFF , 3px 293px #FFF , 1553px 990px #FFF , 1477px 1121px #FFF , 948px 1895px #FFF , 313px 1360px #FFF , 1982px 974px #FFF , 1919px 753px #FFF , 987px 37px #FFF , 729px 1904px #FFF , 1591px 956px #FFF , 1079px 205px #FFF , 1711px 923px #FFF , 1073px 1775px #FFF , 1109px 1744px #FFF , 115px 27px #FFF , 825px 1331px #FFF , 627px 1840px #FFF , 481px 905px #FFF , 1869px 1736px #FFF , 473px 1639px #FFF , 753px 1801px #FFF , 705px 1357px #FFF , 1919px 1459px #FFF , 11px 963px #FFF , 1547px 224px #FFF , 1018px 125px #FFF , 1575px 669px #FFF , 1002px 329px #FFF , 1153px 19px #FFF , 1494px 1471px #FFF , 1718px 1206px #FFF , 653px 1609px #FFF , 53px 728px #FFF , 1058px 1507px #FFF , 1387px 1834px #FFF , 1172px 1915px #FFF , 1882px 1174px #FFF , 1069px 472px #FFF , 1357px 619px #FFF , 1232px 1156px #FFF , 14px 1844px #FFF , 935px 492px #FFF , 880px 1045px #FFF , 528px 67px #FFF , 409px 1809px #FFF , 405px 397px #FFF , 298px 959px #FFF , 116px 1720px #FFF , 1472px 1824px #FFF , 1301px 117px #FFF , 1661px 417px #FFF , 1006px 936px #FFF , 1038px 951px #FFF , 1373px 1073px #FFF , 1923px 991px #FFF , 1184px 1783px #FFF , 834px 1159px #FFF , 697px 1479px #FFF , 1789px 1670px #FFF , 500px 571px #FFF , 1476px 1343px #FFF , 1507px 940px #FFF , 179px 1177px #FFF , 982px 867px #FFF , 393px 1865px #FFF , 1680px 1034px #FFF , 1636px 1066px #FFF , 805px 1567px #FFF , 1947px 399px #FFF , 1018px 634px #FFF , 1433px 862px #FFF , 1654px 28px #FFF , 136px 108px #FFF , 182px 1076px #FFF , 1847px 1342px #FFF , 17px 402px #FFF , 1814px 889px #FFF , 285px 941px #FFF , 462px 599px #FFF , 1443px 1322px #FFF , 467px 1324px #FFF , 216px 478px #FFF , 906px 1128px #FFF , 189px 50px #FFF , 1113px 556px #FFF , 1619px 870px #FFF , 872px 1396px #FFF , 1911px 640px #FFF , 1361px 1286px #FFF , 108px 1646px #FFF , 1340px 1131px #FFF , 22px 1237px #FFF , 433px 31px #FFF , 751px 1484px #FFF , 28px 1495px #FFF , 882px 1510px #FFF , 552px 482px #FFF , 1686px 431px #FFF , 1254px 381px #FFF , 1724px 132px #FFF , 1068px 1034px #FFF , 352px 1991px #FFF , 16px 211px #FFF , 751px 975px #FFF , 1580px 279px #FFF , 640px 1198px #FFF , 168px 755px #FFF , 1734px 323px #FFF , 38px 1153px #FFF , 1513px 41px #FFF , 1709px 1511px #FFF , 1821px 368px #FFF , 1690px 759px #FFF , 1220px 309px #FFF , 1543px 1424px #FFF , 628px 308px #FFF , 1271px 276px #FFF , 927px 1783px #FFF , 1698px 596px #FFF , 232px 1956px #FFF , 1426px 603px #FFF; }
 
 #stars3 {
+  overflow: hidden;
   width: 3px;
   height: 3px;
   background: transparent;
@@ -125,4 +134,46 @@ html {
   from {
     transform: translateY(0px); }
   to {
-    transform: translateY(-2000px); } }
+    transform: translateY(-2000px); } 
+}
+
+#how-to-play {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 100px auto 10px auto;
+  width: 90%;
+  max-width: 600px;
+  font-size: 12px;
+
+  text-align: left;
+  background-color: rgb(30, 30, 30);
+  border: 5px solid darkgray;
+  padding: 10px;
+}
+#how-to-play div {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0;
+  font-size: 16px;
+}
+#how-to-play div * {
+  margin-right: 15px;
+}
+#how-to-play img {
+  max-width: 35px;
+}
+#how-to-play p {
+  width: 100%;
+  margin: 8px 0;
+}
+@media only screen and ((max-width: 600px) or (max-height: 600px)) {
+  #board {
+    --cell-font-size: 18px;
+  }
+  #menu {
+    font-size: 35px;
+  }
+}
