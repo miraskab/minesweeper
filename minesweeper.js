@@ -19,7 +19,7 @@ var overflowBackgroundColor = "red";
 var overflowColor = "yellow";
 
 window.onload = function() {
-    screen.orientation.lock();
+    // screen.orientation.lock();
     let smallestSide = window.outerHeight;
 
     if(window.outerWidth < window.outerHeight) {
@@ -224,7 +224,7 @@ function longPressTile() {
                 tileFlag(tile)
             }
         } 
-    }, 300);
+    }, 600);
 }
 function releaseTile() {
     this.isHeld = false;
