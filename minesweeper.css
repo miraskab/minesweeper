@@ -171,7 +171,7 @@ body {
 }
 @media only screen and ((max-width: 600px) or (max-height: 600px)) {
   #board {
-    --cell-font-size: 18px;
+    --cell-font-size: 16px;
   }
   #menu {
     font-size: 35px;
